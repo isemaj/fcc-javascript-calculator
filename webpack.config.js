@@ -38,7 +38,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Template',
+      title: 'FCC Calculator',
       hash: true,
       template: './src/index.pug',
     }),
