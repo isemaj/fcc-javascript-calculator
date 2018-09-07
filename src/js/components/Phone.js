@@ -6,7 +6,7 @@ import Keypad from './Keypad';
 
 const mainStyle = {
   height: '100%',
-  display: 'grid',
+  position: 'relative',
 };
 
 const phoneStyle = {
@@ -17,6 +17,9 @@ const phoneStyle = {
   border: '10px solid #111111',
   borderRadius: 40,
   boxShadow: '6px 6px 20px rgba(0,0,0,0.65)',
+  display: 'grid',
+  gridTemplateRows: '1fr 1fr',
+  overflow: 'hidden',
 };
 
 class Phone extends Component {

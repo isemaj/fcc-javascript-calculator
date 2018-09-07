@@ -12,7 +12,6 @@ class CurrentInputContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <p>Test2</p>
       </React.Fragment>
     );
   }

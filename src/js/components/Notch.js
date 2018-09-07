@@ -11,6 +11,9 @@ const notchStyle = {
   gridGap: 20,
   alignItems: 'center',
   justifyContent: 'center',
+  position: 'absolute',
+  left: '50%',
+  transform: 'translate(-50%, 0%)',
 };
 
 const cameraStyle = {

@@ -12,7 +12,6 @@ class TotalContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <p>Test2</p>
       </React.Fragment>
     );
   }
