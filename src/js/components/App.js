@@ -1,12 +1,12 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 
-import Test from './Test';
+import Phone from './Phone';
 
 const App = () => (
-  <div>
-    <Test />
-  </div>
+  <React.Fragment>
+    <Phone />
+  </React.Fragment>
 );
 
 export default hot(module)(App);

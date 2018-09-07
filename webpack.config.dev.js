@@ -13,7 +13,7 @@ module.exports = {
   },
   watch: true,
   devServer: {
-    port: 8080,
+    port: 9000,
     hot: true,
     inline: true,
   },

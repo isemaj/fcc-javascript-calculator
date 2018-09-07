@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { test } from '../actions/index';
 
-class TestContainer extends Component {
+class TotalContainer extends Component {
   constructor(props) {
     super(props);
   }
@@ -26,4 +26,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   test,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TotalContainer);
