@@ -1,4 +1,4 @@
-import { TEST } from '../constants/ActionTypes';
+import { NUMBER_INPUT, OPERATOR_INPUT } from '../constants/ActionTypes';
 
 const previousState = {
   status: '',
@@ -6,7 +6,12 @@ const previousState = {
 
 const testReducer = (state = previousState, action) => {
   switch (action.type) {
-    case TEST:
+    case NUMBER_INPUT:
+      return {
+        ...state,
+        status: action.payload,
+      };
+    case OPERATOR_INPUT:
       return {
         ...state,
         status: action.payload,

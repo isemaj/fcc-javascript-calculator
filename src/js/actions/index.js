@@ -1,11 +1,11 @@
 import * as types from '../constants/ActionTypes';
 
-export const test = arg => ({
-  type: types.TEST,
+export const selectNumber = arg => ({
+  type: types.NUMBER_INPUT,
   payload: arg,
 });
 
-export const secondtest = arg => ({
-  type: types.TEST,
+export const selectOperator = arg => ({
+  type: types.OPERATOR_INPUT,
   payload: arg,
 });
