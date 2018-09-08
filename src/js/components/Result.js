@@ -7,6 +7,10 @@ const resultStyle = {
   borderRadius: '0px 0px 20px 20px',
   background: 'linear-gradient(90deg, #7DC4C8, #435E60)',
   height: 188.6,
+  fontFamily: 'Roboto, sans-serif',
+  display: 'grid',
+  gridColumnGap: 8.7,
+  gridRowGap: 10,
 };
 
 const Result = () => (

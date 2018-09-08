@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto'); 
+
+$first-blue-shade: #7DC4C8;
+$second-blue-shade: #71B0B4;
+$third-blue-shade: #649DA0;
+$fourth-blue-shade: #4B7678;
+$fifth-blue-shade: #435E60;
+
+.buttonStyle {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border-radius: 50%; 
+  outline: none;
+  border: none;
+
+  &.zero {
+    background-color: $first-blue-shade;
+  };
+
+  &.one,
+  &.dot,
+  &.divide {
+    background-color: $second-blue-shade;
+  };
+
+  &.four, 
+  &.two,
+  &.posneg,
+  &.multiply {
+    background-color: $third-blue-shade;
+  };
+
+  &.seven,
+  &.five,
+  &.three,
+  &.ce, 
+  &.nine,
+  &.minus {
+    background-color: $fourth-blue-shade;
+  };
+
+  &.ac,
+  &.eight,
+  &.six,
+  &.plus {
+    background-color: $fifth-blue-shade;
+  };
+
+  &.equal {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    left: 48px;
+    top: 2px;
+    background: linear-gradient(120deg, $first-blue-shade, $fifth-blue-shade);
+  };
+};
+

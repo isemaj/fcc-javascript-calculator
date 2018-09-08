@@ -12,6 +12,7 @@ class CurrentInputContainer extends Component {
   render() {
     return (
       <React.Fragment>
+      Test
       </React.Fragment>
     );
   }

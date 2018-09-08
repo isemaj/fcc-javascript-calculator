@@ -4,6 +4,13 @@ import { connect } from 'react-redux';
 
 import { test } from '../actions/index';
 
+const totalStyle = {
+  backgroundColor: 'white',
+  width: 80,
+  height: 90,
+  margin: 'auto',
+};
+
 class TotalContainer extends Component {
   constructor(props) {
     super(props);
@@ -11,8 +18,9 @@ class TotalContainer extends Component {
 
   render() {
     return (
-      <React.Fragment>
-      </React.Fragment>
+      <div style={totalStyle}>
+        <p>Test</p>
+      </div>
     );
   }
 }
