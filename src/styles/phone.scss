@@ -15,20 +15,20 @@ $fifth-blue-shade: #435E60;
   border: none;
 
   &.zero {
-    background-color: $first-blue-shade;
+    background: $first-blue-shade;
   };
 
   &.one,
   &.dot,
   &.divide {
-    background-color: $second-blue-shade;
+    background: $second-blue-shade;
   };
 
   &.four, 
   &.two,
   &.posneg,
   &.multiply {
-    background-color: $third-blue-shade;
+    background: $third-blue-shade;
   };
 
   &.seven,
@@ -37,14 +37,14 @@ $fifth-blue-shade: #435E60;
   &.ce, 
   &.nine,
   &.minus {
-    background-color: $fourth-blue-shade;
+    background: $fourth-blue-shade;
   };
 
   &.ac,
   &.eight,
   &.six,
   &.plus {
-    background-color: $fifth-blue-shade;
+    background: $fifth-blue-shade;
   };
 
   &.equal {
@@ -54,6 +54,10 @@ $fifth-blue-shade: #435E60;
     left: 48px;
     top: 2px;
     background: linear-gradient(120deg, $first-blue-shade, $fifth-blue-shade);
+  };
+
+  &:active{
+    background: rgba(212, 246, 253, 0.71);
   };
 };
 
