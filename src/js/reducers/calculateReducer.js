@@ -4,7 +4,7 @@ const previousState = {
   status: '',
 };
 
-const testReducer = (state = previousState, action) => {
+const calculateReducer = (state = previousState, action) => {
   switch (action.type) {
     case NUMBER_INPUT:
       return {
@@ -21,4 +21,4 @@ const testReducer = (state = previousState, action) => {
   }
 };
 
-export default testReducer;
+export default calculateReducer;
