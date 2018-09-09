@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { test } from '../actions/index';
+const currentInputStyle = {
+  color: '#f5f0f0db',
+  textAlign: 'right',
+  textAlignLast: 'right',
+  alignSelf: 'end',
+  paddingBottom: 2,
+  width: 280,
+  height: 37,
+  margin: '5 auto',
+  fontSize: 22,
+  overflow: 'auto',
+  overflowX: 'scroll',
+  letterSpacing: '0.10em',
+};
 
 class CurrentInputContainer extends Component {
   constructor(props) {
@@ -11,19 +23,15 @@ class CurrentInputContainer extends Component {
 
   render() {
     return (
-      <React.Fragment>
-      Test
-      </React.Fragment>
+      <div className="currentInput" style={currentInputStyle}>
+        {this.props.calculate.formula.replace(/X/g, '*')} 
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  test: state.test,
+  calculate: state.calculate,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  test,
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentInputContainer);
+export default connect(mapStateToProps, null)(CurrentInputContainer);

@@ -5,7 +5,8 @@ module.exports = {
     },
     "rules": {
     	"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx" ]}],
-      "no-shadow": ["error", { "builtinGlobals": true, "hoist": "never"}]
-
+      "react/require-default-props": [0, { forbidDefaultForRequired: true }],
+      "no-shadow": ["off", { "builtinGlobals": false, "hoist": "never", "allow": [] }],
+      "react/no-danger": [0],
     }
 };

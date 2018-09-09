@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import { test } from '../actions/index';
 
 const totalStyle = {
-  backgroundColor: 'white',
-  width: 80,
-  height: 90,
+  color: 'white',
   margin: 'auto',
+  fontSize: 60,
+  paddingTop: 40,
+  maxWidth: 323,
 };
 
 class TotalContainer extends Component {
@@ -19,18 +20,14 @@ class TotalContainer extends Component {
   render() {
     return (
       <div style={totalStyle}>
-        <p>Test</p>
+        {this.props.calculate.result}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  test: state.test,
+  calculate: state.calculate,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  test,
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(TotalContainer);
+export default connect(mapStateToProps, null)(TotalContainer);

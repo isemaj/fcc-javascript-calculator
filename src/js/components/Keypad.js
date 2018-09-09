@@ -6,7 +6,7 @@ const keypadStyle = {
   backgroundColor: '#F0F0EE',
   display: 'grid',
   gridTemplateColumns: 'repeat(4, 60px)',
-  gridTemplateRows: 'repeat(4, 60px)',
+  gridTemplateRows: 'repeat(5, 60px)',
   gridGap: '10px 8.7px',
   margin: '17px auto auto',
 };

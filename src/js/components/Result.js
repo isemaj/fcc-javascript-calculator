@@ -9,8 +9,7 @@ const resultStyle = {
   height: 188.6,
   fontFamily: 'Roboto, sans-serif',
   display: 'grid',
-  gridColumnGap: 8.7,
-  gridRowGap: 10,
+  gridTemplateRows: '1fr 42px',
 };
 
 const Result = () => (

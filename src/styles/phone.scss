@@ -9,10 +9,11 @@ $fifth-blue-shade: #435E60;
 .buttonStyle {
   width: 60px;
   height: 60px;
-  background-color: white;
+  color: white;
   border-radius: 50%; 
   outline: none;
   border: none;
+  font-size: 18px;
 
   &.zero {
     background: $first-blue-shade;
@@ -54,6 +55,7 @@ $fifth-blue-shade: #435E60;
     left: 48px;
     top: 2px;
     background: linear-gradient(120deg, $first-blue-shade, $fifth-blue-shade);
+    font-size: 50px;
   };
 
   &:active{
@@ -61,3 +63,18 @@ $fifth-blue-shade: #435E60;
   };
 };
 
+.currentInput::-webkit-scrollbar-track
+{
+  background-color: transparent;
+}
+
+.currentInput::-webkit-scrollbar
+{
+  height: 5px;
+  background-color: transparent;
+}
+
+.currentInput::-webkit-scrollbar-thumb
+{
+  background-color: #7DC4C8;
+}
