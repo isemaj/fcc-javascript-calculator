@@ -26,3 +26,7 @@ export const addDecimal = arg => ({
 export const clearEntry = () => ({
   type: types.CE,
 });
+
+export const changeSign = () => ({
+  type: types.CHANGE_SIGN,
+});

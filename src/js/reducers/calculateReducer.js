@@ -18,22 +18,15 @@ const previousState = {
 
 const testnew = () => {
   return '6+6';
-} 
+}; 
 
 const calculateReducer = (state = previousState, action) => {
-  console.log(state.formula[state.formula.length - 1]);
-  console.log(state.formula.length);
-  console.log(typeof action.payload);
-  console.log(Number(state.formula[state.formula.length - 1]));
-
   switch (action.type) {
     case NUMBER_INPUT:
       return {
         ...state,
         lastInput: action.payload,
         formula: state.formula.concat(action.payload),
-        // formula: action.payload === '0' ? (state.formula.length === 0 ? '0' : state.formula ) : (state.formula.concat(action.payload)),
-        // formula: state.formula.concat(action.payload),
         lastType: 'number',
       };
 
@@ -43,8 +36,6 @@ const calculateReducer = (state = previousState, action) => {
         ...state,
         lastInput: action.payload,
         formula:  a,
-        // formula: state.lastType === 'operator' ? (action.payload === state.lastInput ? state.formula : state.formula.slice(0, state.formula.length - 1).concat(action.payload)) : (state.result === '' ? state.formula : state.formula.concat(action.payload)),
-        // formula: state.lastType === 'operator' ? (action.payload === state.lastInput ? state.formula : state.formula.slice(0, state.formula.length - 1).concat(action.payload)) : (state.formula.concat(action.payload)),
         lastType: 'operator',
       };
     }
