@@ -1,0 +1,6 @@
+Calculator Functionality:
+  ☐ When inputting numbers, calculator should not allow a number to begin with multiple zero. @created(18-09-11 09:15)
+  ☐ When the decimal element is clicked, a (.) should append to the currently displayed value; two (.) in one number should not be accepted. @created(18-09-11 09:18)
+  ☐ Pressing an operator immediately following = should start a new calculation that operates on the result of the previous evaluation. @created(18-09-11 09:20) 
+  ☐ My calculator should have several decimal places of precision when it comes to rounding (note that there is no exact standard, but you should be able to handle calculations like 2 / 7 with reasonable precision to at least 4 decimal places). @created(18-09-11 09:21)
+

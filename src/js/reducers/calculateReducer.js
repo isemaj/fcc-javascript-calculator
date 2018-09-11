@@ -10,56 +10,42 @@ import {
 const previousState = {
   lastInput: '0',
   formula: '',
-  result: '0',
-  lastType: '',
+  result: '',
+  lastType: 'number',
   splitted: '0',
+  testSplit: 0,
 };
 
+const testnew = () => {
+  return '6+6';
+} 
 
 const calculateReducer = (state = previousState, action) => {
-  // let test = '';
+  console.log(state.formula[state.formula.length - 1]);
+  console.log(state.formula.length);
+  console.log(typeof action.payload);
+  console.log(Number(state.formula[state.formula.length - 1]));
+
   switch (action.type) {
     case NUMBER_INPUT:
-    //   if (action.payload === '0') {
-    //     console.log('0 action.payload');
-    //     if (state.splitted.length === 1 && state.splitted[state.splitted.length - 1] === 0) {
-    //       test = state.formula;
-    //     }
-    //   } else {
-    //     test = state.formula.concat(action.payload);
-    //   }
-
-    //   // console.log('splitted ');
-    //   // console.log(state.splitted);
-    //   // console.log('length ');
-    //   // console.log(state.splitted.length);
-    //   // console.log('second to the last ');
-    //   // console.log(state.splitted[state.splitted.length-1]);
       return {
         ...state,
         lastInput: action.payload,
         formula: state.formula.concat(action.payload),
-        // formula: test,
+        // formula: action.payload === '0' ? (state.formula.length === 0 ? '0' : state.formula ) : (state.formula.concat(action.payload)),
+        // formula: state.formula.concat(action.payload),
         lastType: 'number',
-        splitted: state.formula.split(/[-+*/]/g),
       };
-    case OPERATOR_INPUT:
+
+    case OPERATOR_INPUT: {
+      const a = testnew();
       return {
         ...state,
         lastInput: action.payload,
-        formula: state.lastType === 'operator' ? (action.payload === state.lastInput ? state.formula : state.formula.slice(0, state.formula.length-1).concat(action.payload)) : (state.formula.concat(action.payload)),
+        formula:  a,
+        // formula: state.lastType === 'operator' ? (action.payload === state.lastInput ? state.formula : state.formula.slice(0, state.formula.length - 1).concat(action.payload)) : (state.result === '' ? state.formula : state.formula.concat(action.payload)),
+        // formula: state.lastType === 'operator' ? (action.payload === state.lastInput ? state.formula : state.formula.slice(0, state.formula.length - 1).concat(action.payload)) : (state.formula.concat(action.payload)),
         lastType: 'operator',
-        splitted: state.formula.split(/[-+*/]/g),
-      };
-    case SOLVE: {
-      // console.log(state.formula.length); 
-      // if(state.formula.length === '0' && state.lastInput === '.' ) {
-      //   result: window.eval(0.0)
-      // }
-
-      return {
-        ...state,
-        result: window.eval(state.formula),
       };
     }
     case INITIALIZE:
@@ -69,6 +55,7 @@ const calculateReducer = (state = previousState, action) => {
         formula: '',
         result: '0',
         splitted: '0',
+        testSplit: 0,
       };
     case DECIMAL_INPUT: {
       return {
@@ -82,6 +69,12 @@ const calculateReducer = (state = previousState, action) => {
         ...state,
         formula: state.formula.slice(0, state.formula.length - 1),
       };
+    case SOLVE: {
+      return {
+        ...state,
+        result: window.eval(state.formula),
+      };
+    }
     default:
       return state;
   }
