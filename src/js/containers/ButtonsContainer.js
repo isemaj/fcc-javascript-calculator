@@ -13,11 +13,11 @@ import {
   changeSign,
 } from '../actions/index';
 
-const ButtonsContainer = ({ selectNumber, selectOperator, solverOperator, initialize, addDecimal, clearEntry }) => (
+const ButtonsContainer = ({ selectNumber, selectOperator, solverOperator, initialize, addDecimal, clearEntry, changeSign }) => (
   <React.Fragment>
     <button value="AC" onClick={() => initialize()} className="buttonStyle ac" type="submit">AC</button>
     <button value="CE" onClick={() => clearEntry()} className="buttonStyle ce" type="submit">CE</button>
-    <button onClick={() => changeSign()} className="buttonStyle posneg" type="submit">+/-</button>
+    <button value="CHANGE" onClick={e => changeSign(e.target)} className="buttonStyle posneg" type="submit">+/-</button>
     <button value="/" onClick={e => selectOperator(e.target)} className="buttonStyle divide" type="submit">/</button>
     <button value="7" onClick={e => selectNumber(e.target)} className="buttonStyle seven" type="submit">7</button>
     <button value="8" onClick={e => selectNumber(e.target)} className="buttonStyle eight" type="submit">8</button>

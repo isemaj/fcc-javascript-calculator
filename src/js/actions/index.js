@@ -27,6 +27,7 @@ export const clearEntry = () => ({
   type: types.CE,
 });
 
-export const changeSign = () => ({
+export const changeSign = arg => ({
   type: types.CHANGE_SIGN,
+  payload: arg.value
 });
