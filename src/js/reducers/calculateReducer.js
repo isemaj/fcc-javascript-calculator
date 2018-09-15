@@ -23,8 +23,9 @@ const matchOperator = /(?<!\()[+\-\/*]/g; // match all math operator except thos
 
 const handleSign = (formula, sign, payload) => {
   // console.log('PAYLOAD ' + payload);
-  const lastSignMatch = formula.match(/([()](?!.*[)]))/g);
-  console.log('lastSignMatch ' + lastSignMatch);
+  // const lastSignMatch = formula.match(/([()](?!.*[)]))/g);
+  const lastSignMatch = formula.match(matchOperator);
+  // console.log('lastSignMatch ' + lastSignMatch);
   if (payload === 'CHANGE') {
   // console.log('CHANGE ENTERED');
     if (formula[formula.length - 1] !== ')') {
@@ -50,11 +51,11 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
   const lastIndex = splittedFormula[splittedFormula.length - 1];
   // console.log('SIGN ' + sign);
   // console.log('prevFormula ' + prevFormula);
-  console.log('lastIndex ' + lastIndex);
-  console.log(lastIndex.match(/\d+(\.\d+)?/g));
+  // console.log('lastIndex ' + lastIndex);
+  // console.log(lastIndex.match(/\d+(\.\d+)?/g));
   // console.log('prevFormula.length ' + prevFormula.length);
   // console.log('lastIndex.length ' + lastIndex.length);
-  console.log('splittedFormula ' + splittedFormula);
+  // console.log('splittedFormula ' + splittedFormula);
   // console.log(prevFormula.indexOf(lastIndex));
   // console.log(prevFormula[prevFormula.indexOf(lastIndex) - 1]);
   if (payload === '.') {
@@ -78,42 +79,42 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
 //       INIT        IF TRUE (pos)   IF FALSE (neg)
 // 1.                (-              
 // 2.    258         (-258)          258
-// 3.    258-        258-(-          258-
-// 4.    333-20852   333-(-20852)    333-20852 
+// 3.    256-256     256-(-256)      256-256 
+// 4.    258-        258-(-          258-
 
 
 /////////////////
 
   else if (payload === 'CHANGE') {
-    console.log('POSNEG ENTER');
+    // console.log('POSNEG ENTER');
     // 1. 
     if (prevFormula.length === 0) {
-      console.log('FIRST IF BLOCK');
+      // console.log('FIRST IF BLOCK');
       return prevFormula.concat('(-');  
     }
     if (prevFormula.length === 2 && prevFormula.indexOf('(-') !== -1) {
-      console.log('SECOND ELSE IF BLOCK');
+      // console.log('SECOND ELSE IF BLOCK');
       return '';
     }
     // 1.
 
     // 2.
     if (prevFormula.indexOf(lastIndex) === 0 && !operatorRegx.test(prevFormula)) {
-      console.log('THIRD ELSE IF BLOCK');
+      // console.log('THIRD ELSE IF BLOCK');
       return '(-' + lastIndex + ')';
     }
     if (!prevFormula.match(matchOperator)) { 
-      console.log('FOURTH ELSE IF BLOCK');
+      // console.log('FOURTH ELSE IF BLOCK');
       return lastIndex.match(/\d+(\.\d+)?/g).toString(); // match any numbers or decimal numbers
     } 
     //2.
 
     // if (operatorRegx.test(prevFormula[prevFormula.indexOf(lastIndex) - 1])) {
-    //   console.log('UNKNOWN ELSE IF BLOCK');
+      // console.log('UNKNOWN ELSE IF BLOCK');
     //   // return prevFormula.slice(0, prevFormula.lastIndexOf(lastIndex) - 1).concat(prevFormula[prevFormula.lastIndexOf(lastIndex) - 1] + '(-' + lastIndex + ')');
     //   return prevFormula.slice(0, prevFormula.indexOf(lastIndex) - 1).concat(prevFormula[prevFormula.lastIndexOf(lastIndex) - 1] + '(-' + lastIndex + ')');
     // }
-    console.log('DEFAULT');
+    // console.log('DEFAULT');
     return prevFormula.concat(payload);
   }
 
@@ -121,7 +122,7 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
 
 
   else {
-      console.log('Else Block');
+      // console.log('Else Block');
     return prevFormula.concat(payload);
   }
 
