@@ -28,13 +28,25 @@ const handleSign = (formula, sign, payload) => {
     return false;
   } 
   return true;
-}
+};
+
+const handleFormula = (formula) => {
+  if (/\(-$/g.test(formula)) {
+    if (/[+\-\/*]\(-$/g.test(formula)) {
+      return window.eval(formula.replace(/[+\-\/*]\(-$/g, '')); 
+    }
+    return window.eval(formula.replace(/\(-$/g, ''));
+  }
+  if (/((?<!\()[+\-\/*])$/g.test(formula)){
+    return window.eval(formula.replace(/((?<!\()[+\-\/*])$/g, '')); 
+  }
+  return window.eval(formula);
+};
 
 const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
   const splittedFormula = prevFormula.split(matchOperator);
   const lastIndex = splittedFormula[splittedFormula.length - 1];
-  console.log(splittedFormula);
-  console.log('prevFormula ' + prevFormula);
+  console.log('lastIndex ' + lastIndex);
   if (payload === '.') {
     if (lastInput === '.' || lastIndex.indexOf('.') !== -1) {
       return prevFormula;
@@ -136,7 +148,7 @@ const calculateReducer = (state = previousState, action) => {
     case SOLVE:
       return {
         ...state,
-        result: state.lastType === 'operator' ? window.eval(state.formula.slice(0, state.formula.length - 1)) : window.eval(state.formula),
+        result: handleFormula(state.formula),
       };
     default:
       return state;
