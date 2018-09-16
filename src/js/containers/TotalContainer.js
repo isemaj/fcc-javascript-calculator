@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-import { test } from '../actions/index';
+import Proptypes from 'prop-types';
 
 const totalStyle = {
   color: 'white',
@@ -26,14 +24,19 @@ class TotalContainer extends Component {
   }
 
   render() {
-    console.log(this.props.calculate.result.toString().length);
     return (
-      <div style={this.props.calculate.result.toString().length > 9 ? reducetotalStyle : totalStyle}>
+      <div style={
+        this.props.calculate.result.toString().length > 9 ? reducetotalStyle : totalStyle}
+      >
         {this.props.calculate.result}
       </div>
     );
   }
 }
+
+TotalContainer.propTypes = {
+  calculate: Proptypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   calculate: state.calculate,

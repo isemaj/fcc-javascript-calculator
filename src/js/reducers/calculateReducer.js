@@ -19,34 +19,33 @@ const previousState = {
 };
 
 const operatorRegx = /[+\-\/*]/;
-const matchOperator = /(?<!\()[+\-\/*]/g; // match all math operator except those preceded by opening parenthesis 
+const matchOperator = /(?<!\()[+\-\/*]/g; // match all math operator except those preceded by opening parenthesis
 const handleSign = (formula, sign, payload) => {
   if (payload === 'CHANGE') {
     if (/\((?!.*\))/g.test(formula) || formula[formula.length - 1] === ')') {
       return true;
-    } 
+    }
     return false;
-  } 
+  }
   return true;
 };
 
 const handleFormula = (formula) => {
   if (/\(-$/g.test(formula)) {
     if (/[+\-\/*]\(-$/g.test(formula)) {
-      return Math.round(window.eval(formula.replace(/[+\-\/*]\(-$/g, '')) * 10000 ) / 10000; 
+      return Math.round(window.eval(formula.replace(/[+\-\/*]\(-$/g, '')) * 10000) / 10000;
     }
-    return Math.round(window.eval(formula.replace(/\(-$/g, '')) * 10000 ) / 10000;
+    return Math.round(window.eval(formula.replace(/\(-$/g, '')) * 10000) / 10000;
   }
-  if (/((?<!\()[+\-\/*])$/g.test(formula)){
-    return Math.round(window.eval(formula.replace(/((?<!\()[+\-\/*])$/g, '')) * 10000 ) / 10000; 
+  if (/((?<!\()[+\-\/*])$/g.test(formula)) {
+    return Math.round(window.eval(formula.replace(/((?<!\()[+\-\/*])$/g, '')) * 10000) / 10000;
   }
-  return Math.round(window.eval(formula) * 10000 ) / 10000;
+  return Math.round(window.eval(formula) * 10000) / 10000;
 };
 
 const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
   const splittedFormula = prevFormula.split(matchOperator);
   const lastIndex = splittedFormula[splittedFormula.length - 1];
-  console.log('lastIndex ' + lastIndex);
   if (payload === '.') {
     if (/^[0]+(?=\d+\.?\d*)/g.test(lastIndex)) {
       return prevFormula.replace(/^[0]+(?=\d+\.?\d*)/g, '').concat(payload);
@@ -55,7 +54,7 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
       return prevFormula;
     }
     return prevFormula.concat(payload);
-  } 
+  }
 
   if (operatorRegx.test(payload)) {
     if (/^[0]+(?=\d+\.?\d*)/g.test(lastIndex)) {
@@ -63,23 +62,23 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
     }
     if (prevFormula.length === 0) {
       return prevFormula;
-    } if (operatorRegx.test(prevFormula[prevFormula.length - 1])) {  // if previous char is an operator
-      return prevFormula.replace(/[+\-*/](?!.*[+\-*/])/g, payload);       // replace by new opeartor
+    } if (operatorRegx.test(prevFormula[prevFormula.length - 1])) { // if previous char is an operator
+      return prevFormula.replace(/[+\-*/](?!.*[+\-*/])/g, payload); // replace by new opeartor
     } if (/[(](?!.*[)])/.test(prevFormula) && !/[)]/.test(prevFormula[prevFormula.length - 1])) { // if the first occurrence of ( is not followed by ) and the last char in the formula is not )
-      return prevFormula.concat(')' + payload); // then append with ) along with the new operator
+      return prevFormula.concat(`) ${payload}`); // then append with ) along with the new operator
     }
     return prevFormula.concat(payload);
   }
   if (payload === 'CHANGE') {
     if (sign) {
       if (prevFormula.length === 0) {
-        return prevFormula.concat('(-');  
+        return prevFormula.concat('(-'); 
       }
       if (prevFormula.indexOf(lastIndex) === 0 && !operatorRegx.test(prevFormula)) {
-        return '(-' + lastIndex + ')';
+        return `(- ${lastIndex} )`;
       }
       if (prevFormula.match(matchOperator) && !matchOperator.test(prevFormula[prevFormula.length - 1])) {
-        return prevFormula.slice(0, prevFormula.lastIndexOf(lastIndex)) + '(-' + lastIndex + ')' 
+        return prevFormula.slice(0, prevFormula.lastIndexOf(lastIndex)) + '(-' + lastIndex + ')';
       }
       if (operatorRegx.test(prevFormula[prevFormula.length - 1])) {
         return prevFormula.concat('(-');
@@ -89,11 +88,11 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
       if (prevFormula.length === 2 && /\(-$/g.test(prevFormula)) {
         return '';
       }
-      if (!prevFormula.match(matchOperator)) { 
+      if (!prevFormula.match(matchOperator)) {
         return lastIndex.match(/\d*\.?\d*/g)[2].toString(); // match any numbers or decimal numbers
-      } 
+      }
       if (prevFormula[prevFormula.length - 1] === ')' && matchOperator.test(prevFormula)) {
-        return prevFormula.replace(/(\(-)(?!.*\()/g, '').replace(/\)$/g, '').toString() ;
+        return prevFormula.replace(/(\(-)(?!.*\()/g, '').replace(/\)$/g, '').toString();
       }
       if (/\(-$/g.test(prevFormula) && matchOperator.test(prevFormula)) {
         return prevFormula.replace(/\(-$/g, '');
@@ -101,7 +100,7 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
     }
     return prevFormula.concat(payload);
   }
-    return prevFormula.concat(payload);
+  return prevFormula.concat(payload);
 };
 
 

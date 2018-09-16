@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Proptypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const currentInputStyle = {
@@ -24,11 +25,15 @@ class CurrentInputContainer extends Component {
   render() {
     return (
       <div className="currentInput" style={currentInputStyle}>
-        {this.props.calculate.formula.replace(/X/g, '*')} 
+        {this.props.calculate.formula.replace(/X/g, '*')}
       </div>
     );
   }
 }
+
+CurrentInputContainer.propTypes = {
+  calculate: Proptypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   calculate: state.calculate,

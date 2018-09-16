@@ -13,7 +13,15 @@ import {
   changeSign,
 } from '../actions/index';
 
-const ButtonsContainer = ({ selectNumber, selectOperator, solverOperator, initialize, addDecimal, clearEntry, changeSign }) => (
+const ButtonsContainer = ({
+  selectNumber,
+  selectOperator,
+  solverOperator,
+  initialize,
+  addDecimal,
+  clearEntry,
+  changeSign,
+}) => (
   <React.Fragment>
     <button value="AC" onClick={() => initialize()} className="buttonStyle ac" type="submit">AC</button>
     <button value="CE" onClick={() => clearEntry()} className="buttonStyle ce" type="submit">CE</button>

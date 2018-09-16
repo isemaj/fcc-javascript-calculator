@@ -29,5 +29,5 @@ export const clearEntry = () => ({
 
 export const changeSign = arg => ({
   type: types.CHANGE_SIGN,
-  payload: arg.value
+  payload: arg.value,
 });
