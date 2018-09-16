@@ -33,14 +33,14 @@ const handleSign = (formula, sign, payload) => {
 const handleFormula = (formula) => {
   if (/\(-$/g.test(formula)) {
     if (/[+\-\/*]\(-$/g.test(formula)) {
-      return window.eval(formula.replace(/[+\-\/*]\(-$/g, '')); 
+      return Math.round(window.eval(formula.replace(/[+\-\/*]\(-$/g, '')) * 10000 ) / 10000; 
     }
-    return window.eval(formula.replace(/\(-$/g, ''));
+    return Math.round(window.eval(formula.replace(/\(-$/g, '')) * 10000 ) / 10000;
   }
   if (/((?<!\()[+\-\/*])$/g.test(formula)){
-    return window.eval(formula.replace(/((?<!\()[+\-\/*])$/g, '')); 
+    return Math.round(window.eval(formula.replace(/((?<!\()[+\-\/*])$/g, '')) * 10000 ) / 10000; 
   }
-  return window.eval(formula);
+  return Math.round(window.eval(formula) * 10000 ) / 10000;
 };
 
 const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
