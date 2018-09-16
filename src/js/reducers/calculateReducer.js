@@ -48,6 +48,9 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
   const lastIndex = splittedFormula[splittedFormula.length - 1];
   console.log('lastIndex ' + lastIndex);
   if (payload === '.') {
+    if (/^[0]+(?=\d+\.?\d*)/g.test(lastIndex)) {
+      return prevFormula.replace(/^[0]+(?=\d+\.?\d*)/g, '').concat(payload);
+    }
     if (lastInput === '.' || lastIndex.indexOf('.') !== -1) {
       return prevFormula;
     }
@@ -55,6 +58,9 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
   } 
 
   if (operatorRegx.test(payload)) {
+    if (/^[0]+(?=\d+\.?\d*)/g.test(lastIndex)) {
+      return prevFormula.replace(/^[0]+(?=\d+\.?\d*)/g, '').concat(payload);
+    }
     if (prevFormula.length === 0) {
       return prevFormula;
     } if (operatorRegx.test(prevFormula[prevFormula.length - 1])) {  // if previous char is an operator
@@ -87,15 +93,12 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
         return lastIndex.match(/\d*\.?\d*/g)[2].toString(); // match any numbers or decimal numbers
       } 
       if (prevFormula[prevFormula.length - 1] === ')' && matchOperator.test(prevFormula)) {
-        console.log('3. FALSE BLOCK');
         return prevFormula.replace(/(\(-)(?!.*\()/g, '').replace(/\)$/g, '').toString() ;
       }
       if (/\(-$/g.test(prevFormula) && matchOperator.test(prevFormula)) {
-        console.log('4. FALSE BLOCK');
         return prevFormula.replace(/\(-$/g, '');
       }
     }
-    console.log('DEFAULT');
     return prevFormula.concat(payload);
   }
     return prevFormula.concat(payload);
