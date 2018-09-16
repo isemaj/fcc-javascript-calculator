@@ -20,6 +20,7 @@ const previousState = {
 
 const operatorRegx = /[+\-\/*]/;
 const matchOperator = /(?<!\()[+\-\/*]/g; // match all math operator except those inside the parenthesis
+// const matchOperator = /\(.*?\)|([+\-\/*])/g;
 
 const handleSign = (formula, sign, payload) => {
   // console.log('PAYLOAD ' + payload);
@@ -44,6 +45,7 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
   const splittedFormula = prevFormula.split(matchOperator);
   const lastIndex = splittedFormula[splittedFormula.length - 1];
   // console.log('SIGN ' + sign);
+  console.log(splittedFormula);
   console.log('prevFormula ' + prevFormula);
   // console.log('lastIndex ' + lastIndex);
   // console.log(lastIndex.match(/\d+(\.\d+)?/g));
@@ -80,12 +82,17 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
 /////////////////
 
   else if (payload === 'CHANGE') {
+    console.log('##############');
+    // console.log(operatorRegx.test(prevFormula[prevFormula.length - 1])); 
+    // console.log(prevFormula.match(matchOperator));
+    console.log(matchOperator.test(prevFormula));
     // console.log('sign ' + sign);
+
     // console.log('lastIndex ' + lastIndex);
     // console.log(prevFormula.lastIndexOf(lastIndex));
     // console.log(prevFormula[prevFormula.length -1 ]);
     // console.log(matchOperator.test(prevFormula[prevFormula.length - 1]));
-    console.log(sign);
+    // console.log(sign);
 
     if (sign) {
       if (prevFormula.length === 0) {
@@ -100,19 +107,35 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
         console.log('3. TRUE BLOCK');
         return prevFormula.slice(0, prevFormula.lastIndexOf(lastIndex)) + '(-' + lastIndex + ')' 
       }
+      if (operatorRegx.test(prevFormula[prevFormula.length - 1])) {
+        console.log('4. TRUE BLOCK');
+        return prevFormula.concat('(-');
+      }
     }
 
     if (!sign) {
-      console.log(prevFormula.length);
-      console.log(prevFormula.indexOf('('));
-      if (prevFormula.length === 2 && /\((?!.*\))/g.test(prevFormula)) {
+      if (prevFormula.length === 2 && /\(-$/g.test(prevFormula)) {
         console.log('1. FALSE BLOCK');
         return '';
       }
       if (!prevFormula.match(matchOperator)) { 
         console.log('2. FALSE BLOCK');
-        return lastIndex.match(/\d+(\.\d+)?/g).toString(); // match any numbers or decimal numbers
+        // return lastIndex.match(/\d+(\.\d+)?/g).toString(); // match any numbers or decimal numbers
+        return lastIndex.match(/\d*\.?\d*/g)[2].toString(); // match any numbers or decimal numbers
+        // return lastIndex.exec(/\d*(\.?\d+)?/g).toString(); // match any numbers or decimal numbers
+        // console.log(lastIndex);
+        // var regex = /\(\d*\.?\d*\)/;
+        // console.log(lastIndex.match(regex));
+        // return /\d*(\.?\d+)*/g.exec(lastIndex); /////////// FIX THIS
       } 
+      if (prevFormula[prevFormula.length - 1] === ')' && matchOperator.test(prevFormula)) {
+        console.log('3. FALSE BLOCK');
+        return prevFormula.replace(/(\(-)(?!.*\()/g, '').replace(/\)$/g, '').toString() ;
+      }
+      if (/\(-$/g.test(prevFormula) && matchOperator.test(prevFormula)) {
+        console.log('4. FALSE BLOCK');
+        return prevFormula.replace(/\(-$/g, '');
+      }
     }
 
     // 1. 
