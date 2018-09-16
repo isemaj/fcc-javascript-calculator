@@ -19,23 +19,12 @@ const previousState = {
 };
 
 const operatorRegx = /[+\-\/*]/;
-const matchOperator = /(?<!\()[+\-\/*]/g; // match all math operator except those inside the parenthesis
-// const matchOperator = /\(.*?\)|([+\-\/*])/g;
-
+const matchOperator = /(?<!\()[+\-\/*]/g; // match all math operator except those preceded by opening parenthesis 
 const handleSign = (formula, sign, payload) => {
-  // console.log('PAYLOAD ' + payload);
-  // const lastSignMatch = formula.match(/([()](?!.*[)]))/g);
-  // const lastSignMatch = formula.match(matchOperator);
-  // console.log('formula ' + formula);
-  // console.log(/\((?!.*\))/g.test(formula));
-  // console.log('lastSignMatch ' + lastSignMatch);
   if (payload === 'CHANGE') {
-  // console.log('CHANGE ENTERED');
     if (/\((?!.*\))/g.test(formula) || formula[formula.length - 1] === ')') {
-      // console.log('MATCHED PASSED return true');
       return true;
     } 
-    // console.log('MATCHED NOT PASSED return false');
     return false;
   } 
   return true;
@@ -44,16 +33,8 @@ const handleSign = (formula, sign, payload) => {
 const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
   const splittedFormula = prevFormula.split(matchOperator);
   const lastIndex = splittedFormula[splittedFormula.length - 1];
-  // console.log('SIGN ' + sign);
   console.log(splittedFormula);
   console.log('prevFormula ' + prevFormula);
-  // console.log('lastIndex ' + lastIndex);
-  // console.log(lastIndex.match(/\d+(\.\d+)?/g));
-  // console.log('prevFormula.length ' + prevFormula.length);
-  // console.log('lastIndex.length ' + lastIndex.length);
-  // console.log('splittedFormula ' + splittedFormula);
-  // console.log(prevFormula.indexOf(lastIndex));
-  // console.log(prevFormula[prevFormula.indexOf(lastIndex) - 1]);
   if (payload === '.') {
     if (lastInput === '.' || lastIndex.indexOf('.') !== -1) {
       return prevFormula;
@@ -71,62 +52,27 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
     }
     return prevFormula.concat(payload);
   }
-
-//       INIT        IF TRUE (pos)   IF FALSE (neg)
-// 1.                (-              
-// 2.    258         (-258)          258
-// 3.    256-256     256-(-256)      256-256 
-// 4.    258-        258-(-          258-
-
-
-/////////////////
-
-  else if (payload === 'CHANGE') {
-    console.log('##############');
-    // console.log(operatorRegx.test(prevFormula[prevFormula.length - 1])); 
-    // console.log(prevFormula.match(matchOperator));
-    console.log(matchOperator.test(prevFormula));
-    // console.log('sign ' + sign);
-
-    // console.log('lastIndex ' + lastIndex);
-    // console.log(prevFormula.lastIndexOf(lastIndex));
-    // console.log(prevFormula[prevFormula.length -1 ]);
-    // console.log(matchOperator.test(prevFormula[prevFormula.length - 1]));
-    // console.log(sign);
-
+  if (payload === 'CHANGE') {
     if (sign) {
       if (prevFormula.length === 0) {
-        console.log('1. TRUE BLOCK');
         return prevFormula.concat('(-');  
       }
       if (prevFormula.indexOf(lastIndex) === 0 && !operatorRegx.test(prevFormula)) {
-        console.log('2. TRUE BLOCK');
         return '(-' + lastIndex + ')';
       }
       if (prevFormula.match(matchOperator) && !matchOperator.test(prevFormula[prevFormula.length - 1])) {
-        console.log('3. TRUE BLOCK');
         return prevFormula.slice(0, prevFormula.lastIndexOf(lastIndex)) + '(-' + lastIndex + ')' 
       }
       if (operatorRegx.test(prevFormula[prevFormula.length - 1])) {
-        console.log('4. TRUE BLOCK');
         return prevFormula.concat('(-');
       }
     }
-
     if (!sign) {
       if (prevFormula.length === 2 && /\(-$/g.test(prevFormula)) {
-        console.log('1. FALSE BLOCK');
         return '';
       }
       if (!prevFormula.match(matchOperator)) { 
-        console.log('2. FALSE BLOCK');
-        // return lastIndex.match(/\d+(\.\d+)?/g).toString(); // match any numbers or decimal numbers
         return lastIndex.match(/\d*\.?\d*/g)[2].toString(); // match any numbers or decimal numbers
-        // return lastIndex.exec(/\d*(\.?\d+)?/g).toString(); // match any numbers or decimal numbers
-        // console.log(lastIndex);
-        // var regex = /\(\d*\.?\d*\)/;
-        // console.log(lastIndex.match(regex));
-        // return /\d*(\.?\d+)*/g.exec(lastIndex); /////////// FIX THIS
       } 
       if (prevFormula[prevFormula.length - 1] === ')' && matchOperator.test(prevFormula)) {
         console.log('3. FALSE BLOCK');
@@ -137,46 +83,10 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
         return prevFormula.replace(/\(-$/g, '');
       }
     }
-
-    // 1. 
-    // if (prevFormula.length === 0) {
-    //   // console.log('FIRST IF BLOCK');
-    //   return prevFormula.concat('(-');  
-    // }
-    // if (prevFormula.length === 2 && prevFormula.indexOf('(-') !== -1) {
-    //   // console.log('SECOND ELSE IF BLOCK');
-    //   return '';
-    // }
-    // 1.
-
-    // 2.
-    // if (prevFormula.indexOf(lastIndex) === 0 && !operatorRegx.test(prevFormula)) {
-    //   // console.log('THIRD ELSE IF BLOCK');
-    //   return '(-' + lastIndex + ')';
-    // }
-    // if (!prevFormula.match(matchOperator)) { 
-    //   // console.log('FOURTH ELSE IF BLOCK');
-    //   return lastIndex.match(/\d+(\.\d+)?/g).toString(); // match any numbers or decimal numbers
-    // } 
-    //2.
-
-    // if (operatorRegx.test(prevFormula[prevFormula.indexOf(lastIndex) - 1])) {
-      // console.log('UNKNOWN ELSE IF BLOCK');
-    //   // return prevFormula.slice(0, prevFormula.lastIndexOf(lastIndex) - 1).concat(prevFormula[prevFormula.lastIndexOf(lastIndex) - 1] + '(-' + lastIndex + ')');
-    //   return prevFormula.slice(0, prevFormula.indexOf(lastIndex) - 1).concat(prevFormula[prevFormula.lastIndexOf(lastIndex) - 1] + '(-' + lastIndex + ')');
-    // }
     console.log('DEFAULT');
     return prevFormula.concat(payload);
   }
-
-/////////////////
-
-
-  else {
-      // console.log('Else Block');
     return prevFormula.concat(payload);
-  }
-
 };
 
 
