@@ -17,18 +17,12 @@ const currentInputStyle = {
   letterSpacing: '0.10em',
 };
 
-class CurrentInputContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="currentInput" style={currentInputStyle}>
-        {this.props.calculate.formula.replace(/X/g, '*')}
-      </div>
-    );
-  }
+const CurrentInputContainer = (props) => {
+  return (
+    <div className="currentInput" style={currentInputStyle}>
+      {props.calculate.formula.replace(/X/g, '*')}
+    </div>
+  );
 }
 
 CurrentInputContainer.propTypes = {

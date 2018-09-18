@@ -18,20 +18,14 @@ const reducetotalStyle = {
   maxWidth: 323,
 };
 
-class TotalContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div style={
-        this.props.calculate.result.toString().length > 9 ? reducetotalStyle : totalStyle}
-      >
-        {this.props.calculate.result}
-      </div>
-    );
-  }
+const TotalContainer = (props) => {
+  return (
+    <div style={
+      props.calculate.result.toString().length > 9 ? reducetotalStyle : totalStyle}
+    >
+      {props.calculate.result}
+    </div>
+  );
 }
 
 TotalContainer.propTypes = {
