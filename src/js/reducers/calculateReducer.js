@@ -44,6 +44,7 @@ const handleFormula = (formula) => {
 };
 
 const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
+  // console.log(sign);
   const splittedFormula = prevFormula.split(matchOperator);
   const lastIndex = splittedFormula[splittedFormula.length - 1];
   if (payload === '.') {
@@ -72,7 +73,7 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
   if (payload === 'CHANGE') {
     if (sign) {
       if (prevFormula.length === 0) {
-        return prevFormula.concat('(-'); 
+        return prevFormula.concat('(-');
       }
       if (prevFormula.indexOf(lastIndex) === 0 && !operatorRegx.test(prevFormula)) {
         return `(- ${lastIndex} )`;
@@ -89,7 +90,7 @@ const createFormula = (lastInput, prevFormula, payload, lastType, sign) => {
         return '';
       }
       if (!prevFormula.match(matchOperator)) {
-        return lastIndex.match(/\d*\.?\d*/g)[2].toString(); // match any numbers or decimal numbers
+        return lastIndex.match(/\d*\.?\d*/g)[3].toString(); // match any numbers or decimal numbers
       }
       if (prevFormula[prevFormula.length - 1] === ')' && matchOperator.test(prevFormula)) {
         return prevFormula.replace(/(\(-)(?!.*\()/g, '').replace(/\)$/g, '').toString();
@@ -128,6 +129,7 @@ const calculateReducer = (state = previousState, action) => {
         lastInput: action.payload,
         lastType: 'operator',
         formula: createFormula(state.lastInput, state.formula, action.payload, state.lastType, state.sign),
+        sign: handleSign(state.formula, state.sign, action.payload),
       };
     case CHANGE_SIGN:
       return {
