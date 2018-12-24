@@ -9,7 +9,7 @@
     "dev": "webpack-dev-server --config webpack.config.dev.js"
   },
   "author": "James Itum",
-  "license": "MIT",
+  "license": "GPLv3",
   "dependencies": {
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
