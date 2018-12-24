@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto'); 
+
+$first-blue-shade: #7DC4C8;
+$second-blue-shade: #71B0B4;
+$third-blue-shade: #649DA0;
+$fourth-blue-shade: #4B7678;
+$fifth-blue-shade: #435E60;
+
+.buttonStyle {
+  width: 60px;
+  height: 60px;
+  color: white;
+  border-radius: 50%; 
+  outline: none;
+  border: none;
+  font-size: 18px;
+
+  &.zero {
+    background: $first-blue-shade;
+  };
+
+  &.one,
+  &.dot,
+  &.divide {
+    background: $second-blue-shade;
+  };
+
+  &.four, 
+  &.two,
+  &.posneg,
+  &.multiply {
+    background: $third-blue-shade;
+  };
+
+  &.seven,
+  &.five,
+  &.three,
+  &.ce, 
+  &.nine,
+  &.minus {
+    background: $fourth-blue-shade;
+  };
+
+  &.ac,
+  &.eight,
+  &.six,
+  &.plus {
+    background: $fifth-blue-shade;
+  };
+
+  &.equal {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    left: 48px;
+    top: 2px;
+    background: linear-gradient(120deg, $first-blue-shade, $fifth-blue-shade);
+    font-size: 50px;
+  };
+
+  &:active{
+    background: rgba(212, 246, 253, 0.71);
+  };
+};
+
+.currentInput::-webkit-scrollbar-track
+{
+  background-color: transparent;
+}
+
+.currentInput::-webkit-scrollbar
+{
+  height: 5px;
+  background-color: transparent;
+}
+
+.currentInput::-webkit-scrollbar-thumb
+{
+  background-color: #7DC4C8;
+}
